@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 5 - Docker Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f0f4f8;
+            padding: 60px 20px;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            max-width: 500px;
+            margin: auto;
+            border-radius: 12px;
+        }
+        button {
+            padding: 12px 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Lab 5: CI/CD Deployment</h1>
+        <p>Application Development and Deployment Architecture</p>
+        <p id="message">Application is ready.</p>
+        <button onclick="showMessage()">Test Application</button>
+    </div>
+
+    <script>
+        function showMessage() {
+            document.getElementById("message").textContent =
+                "Application is working successfully!";
+        }
+    </script>
+</body>
+</html>
