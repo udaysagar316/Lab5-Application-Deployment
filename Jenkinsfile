@@ -2,6 +2,10 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_EXE = 'C:/Users/uppar/AppData/Local/Programs/DockerDesktop/resources/bin/docker.exe'
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -19,20 +23,20 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t lab5-web-app:1.0 .'
+                bat '"%DOCKER_EXE%" build -t lab5-web-app:1.0 .'
             }
         }
 
         stage('Deploy Container') {
             steps {
-                bat 'powershell -NoProfile -Command "$c = docker ps -aq --filter name=^lab5-container$; if ($c) { docker rm -f lab5-container }"'
-                bat 'docker run -d --name lab5-container -p 8081:80 lab5-web-app:1.0'
+                bat '"%DOCKER_EXE%" rm -f lab5-container || exit /b 0'
+                bat '"%DOCKER_EXE%" run -d --name lab5-container -p 8081:80 lab5-web-app:1.0'
             }
         }
 
         stage('Verify Deployment') {
             steps {
-                bat 'docker ps'
+                bat '"%DOCKER_EXE%" ps'
                 bat 'curl.exe -f http://localhost:8081'
             }
         }
